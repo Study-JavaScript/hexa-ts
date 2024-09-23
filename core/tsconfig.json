@@ -13,6 +13,6 @@
       "strict": true, 
       "forceConsistentCasingInFileNames": true // ✅ Forzar mayúsculas y minúsculas en nombres de archivo
     },
-    "include": ["./domain", "./application"]
+    "include": ["./domain", "./application", "./test"]
   }
   

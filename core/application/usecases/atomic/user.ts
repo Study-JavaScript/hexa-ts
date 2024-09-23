@@ -1,3 +1,4 @@
+import { FindDbError } from "../../../domain/errors/main";
 import { UserRepository } from "../../../application/repositories/user";
 import { User } from "../../../domain/entities/User";
 // import { User } from ".../../core/domain/entities/User";
@@ -27,6 +28,10 @@ export class ReadAll extends UseCaseBase {
 }
 export class UpdateUser extends UseCaseBase {
     async execute(id: number, userData: Partial<User>): Promise<User> {
+        const existingUser = await this.userRepository.readById(id);
+        if (!existingUser) {
+            throw new FindDbError('User not found in usecase'); // Manejo del error
+        }
         return this.userRepository.update(id, userData);
     }
 }

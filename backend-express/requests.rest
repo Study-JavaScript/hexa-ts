@@ -20,7 +20,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6I
 ### Read un usuario por ID ✅
 GET http://localhost:3000/users/id?q=2
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjcxMDI5NDEsImV4cCI6MTcyNzEwNjU0MX0.cgUWwF0l5z16DlKle2bfdr5dSL35SUed95dAWLs8DNY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjcxMjIwMjEsImV4cCI6MTcyNzEyNTYyMX0.FqGFzlf1qLM2DOUa6shzqXgPWjjVwg_SA2v63Ecs4tM
 
 ###
 
