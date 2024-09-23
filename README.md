@@ -21,6 +21,66 @@ Proyecto para explorar conceptos y técnicas útiles especialmente en arquitectu
 - [**prisma**](https://www.prisma.io/docs)
 - [**typescript**](https://www.typescriptlang.org/docs/)
 
+<details><summary><code><bold>Estructura</bold> </code></summary><br/>
+
+- _Esta es la idea a seguir actualmente como estructura_
+#### Estructura carpetas actual
+
+```
+project/
+├── core/
+│   ├── domain/
+│   │   ├── entities/
+│   │   │   ├── User.ts
+│   │   │   └── Post.ts
+│   │   └── errors/
+│   │       ├── main.ts
+│   │       └── <others>.ts
+│   └── application/
+│       ├── usecases/
+│       │   ├── CreateUserUseCase.ts ⚠️🖊️
+│       │   └── CreatePostUseCase.ts ⚠️🖊️
+│       ├── repositories/
+│       │   ├── user.d.ts
+│       │   └── post.d.ts
+│       ├── services/
+│       │   ├── email.d.ts
+│       │   └── auth.d.ts
+│       └── ports/ ❓🖊️
+│           ├── in/
+│           │   └── UserControllerPort.ts
+│           └── out/
+│               └── UserPersistencePort.ts
+├── backend/
+│   ├── infrastructure/
+│   │   ├── prisma/ ❓⚠️ //Podría pasar esta parte aquí??
+│   │   │   └── schema.prisma
+│   │   ├── repositories/
+│   │   │   ├── prisma-user.ts
+│   │   │   └── prisma-post.ts
+│   │   └── config/
+│   │       └── prisma-db.ts
+│   └── interfaces/ 
+│       ├── controllers/
+│       │   └── ExpressUserController.ts
+│       └── routes/
+│           └── userRoutes.ts
+│   ├── prisma/
+│   │   └── schema.prisma
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── ...
+├── frontend/
+│   ├── src/
+|   │   └── ...
+|   ├── package.json
+|   └── tsconfig.json
+└── tsconfig.json
+    
+```
+
+</details>
+
 
 ## [Recursos](https://github.com/SKRTEEEEEE/markdowns)
 
