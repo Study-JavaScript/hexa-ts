@@ -51,15 +51,17 @@ project/
 │           │   └── UserControllerPort.ts
 │           └── out/
 │               └── UserPersistencePort.ts
+├── infrastructure/
+│   ├── prisma/
+│   │   └── schema.prisma
+│   ├── repositories/
+│   │   ├── prisma-user.ts
+│   │   └── prisma-post.ts
+│   ├── config/
+│   │   └── prisma-db.ts
+│   ├── package.json
+│   └── tsconfig.json
 ├── backend/
-│   ├── infrastructure/
-│   │   ├── prisma/ 
-│   │   │   └── schema.prisma
-│   │   ├── repositories/
-│   │   │   ├── prisma-user.ts
-│   │   │   └── prisma-post.ts
-│   │   └── config/
-│   │       └── prisma-db.ts
 │   └── interfaces/ 
 │       ├── controllers/
 │       │   └── ExpressUserController.ts
@@ -73,7 +75,7 @@ project/
 |   │   └── ...
 |   ├── package.json
 |   └── tsconfig.json
-└── tsconfig.json
+└── tsconfig.json ❌⚠️
     
 ```
 
