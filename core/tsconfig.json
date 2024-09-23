@@ -1,9 +1,6 @@
 {
     "compilerOptions": {
       "baseUrl": ".",
-      "paths": {
-        "@core/*": ["./core/*"]
-      },
       "module": "ESNext",
       "target": "ES2020",
       "lib": ["dom", "esnext"],
@@ -12,11 +9,6 @@
       "resolveJsonModule": true,
       "skipLibCheck": true
     },
-    "include": [
-      "core/**/*.ts",
-      "backend-express/**/*.ts",
-      "frontend-next/**/*.ts"
-    ],
-    "exclude": ["node_modules"]
+    "include": ["./domain", "./application"]
   }
   
