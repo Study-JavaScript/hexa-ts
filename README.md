@@ -53,7 +53,7 @@ project/
 │               └── UserPersistencePort.ts
 ├── backend/
 │   ├── infrastructure/
-│   │   ├── prisma/ ❓⚠️ //Podría pasar esta parte aquí??
+│   │   ├── prisma/ 
 │   │   │   └── schema.prisma
 │   │   ├── repositories/
 │   │   │   ├── prisma-user.ts
@@ -65,8 +65,6 @@ project/
 │       │   └── ExpressUserController.ts
 │       └── routes/
 │           └── userRoutes.ts
-│   ├── prisma/
-│   │   └── schema.prisma
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── ...
