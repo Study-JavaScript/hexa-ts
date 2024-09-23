@@ -200,3 +200,9 @@ Integrar pruebas unitarias en el `core` de la aplicación, garantizando la indep
     - La entidad `LikePost` no estaba definida, lo que impedía que las pruebas se completaran correctamente.
     - Las operaciones de actualización no verificaban la existencia de la entidad, lo cual es una buena práctica y debe implementarse.
 
+## 4. Mejorar arquitectura
+### Detalles
+#### Separar la app y el domain a la ruta raíz?
+#### Traspasar entities de classes a tipos
+#### Tratar correctamente los casos de uso / repository
+(post.canceled)

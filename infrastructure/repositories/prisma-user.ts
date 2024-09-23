@@ -2,8 +2,8 @@
 
 import { Prisma } from '@prisma/client';
 import {UserRepository}from "../../core/application/repositories/user"
-import {User} from "../../core/domain/entities/User"
 import { PrismaClientConfig } from '../connectors/prisma-db';
+import { User } from '../../domain/entities/User';
 
 export class PrismaUserRepository extends PrismaClientConfig implements UserRepository {
   constructor() {

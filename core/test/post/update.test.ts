@@ -2,7 +2,7 @@
 
 import { PostRepository } from "application/repositories/post";
 import { UpdatePost } from "application/usecases/atomic/post";
-import { Post } from "domain/entities/Post";
+import { Post } from "../../../domain/entities/Post";
 
 
 

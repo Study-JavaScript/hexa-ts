@@ -1,6 +1,6 @@
 import { UserRepository } from "application/repositories/user";
 import { ReadByEmail } from "application/usecases/atomic/user";
-import { User } from "domain/entities/User";
+import { User } from "../../../domain/entities/User";
 
 // Mock del repositorio
 const mockUserRepository = (): jest.Mocked<UserRepository> => ({

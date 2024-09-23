@@ -1,5 +1,5 @@
 import { PrismaClientConfig } from "../connectors/prisma-db";
-import { Post } from "../../core/domain/entities/Post"
+import { Post } from "../../domain/entities/Post"
 import { PostRepository } from "../../core/application/repositories/post"
 
 export class PrismaPostRepository extends PrismaClientConfig implements PostRepository {

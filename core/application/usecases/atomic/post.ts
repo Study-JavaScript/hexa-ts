@@ -1,5 +1,5 @@
+import { Post } from "../../../../domain/entities/Post";
 import { PostRepository } from "../../../application/repositories/post";
-import { Post } from "../../../domain/entities/Post";
 
 // ⚠️🖊️ Se ha de manejar correctamente el uso de post.deleted ya que los test nos lo requiere y solo seria necesario en el update
 // 🧠❓ Tambien hemos de pensar que hacer con los update, ya que es buena practica comprobar que x existe antes de hacer update, por lo tanto quizas nos interesa devolver ese x para segun que cuestiones del backend o frontend

@@ -2,7 +2,7 @@
 
 import { LikePostRepository } from "application/repositories/likepost";
 import { CreateLikePost } from "application/usecases/atomic/likepost";
-import { LikePost } from "domain/entities/LikePost";
+import { LikePost } from "../../../domain/entities/LikePost";
 
 
 
