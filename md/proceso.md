@@ -2,34 +2,31 @@
 
 ## 1. Migración `backend-express/prisma` -> `backend-express/infrastructure/prisma`
 ### Objetivo principal
-Mover la carpeta de `prisma` de `backend-express` a `backend-express/infrastructure`, para tener mas consistencia en la estructura hexagonal.
+Mover la carpeta `prisma` desde `backend-express` a `backend-express/infrastructure` para mejorar la consistencia en la estructura de la arquitectura hexagonal.
+
 ### Detalles
 #### Añadir/modificar output en `schema.prisma`
-- Indicar en el generador del archivo `schema.prisma` donde esta "ubicado" el `@prisma/client`. Para ello debemos apuntar a nuestro `node_modules`, pero en vez de apuntar como: `...node_modules/@prisma/client` debemos apuntar indicando `.prisma/client`, para evitar el siguiente warning:
+- Actualizar la configuración del generador en `schema.prisma` para apuntar a `@prisma/client` desde `node_modules` utilizando la notación `.prisma/client` y evitar el warning correspondiente.
     ![warning @prisma/client](./img/warning-prisma-client.png)
 - Para este ejemplo quedara así:
     ![imagen schema.prisma updated](./img/schemas.prisma-root-updated.png)
 
 #### Generar y migrar Prisma apuntando a la nueva ruta
-- Apuntar a la nueva ruta a la hora de ejecutar comandos "Prisma", para ello, utilizaremos la bandera `--schema`.
+- Usar la bandera `--schema` para apuntar a la nueva ubicación de `prisma` al ejecutar comandos de Prisma.
 
 ## 2. Migrate `infrastructure`
 ### Objetivo principal
-Mover la carpeta de `infrastructure` de `./backend-express` a `./` (o ruta raíz). Al realizar esto, se obtiene una consistencia total en la arquitectura hexagonal, al cada parte ser independiente de la otra. 
+Mover la carpeta `infrastructure` desde `backend-express` a la raíz del proyecto, logrando así una separación total entre las diferentes partes de la arquitectura hexagonal.
 
 Para ello, infrastructure tiene sus propios `node_modules`, los cuales, son completamente independientes del backend o interface, los cuales mantendrán la lógica del backend exclusivamente.
 
 ### Detalles
 #### Desinstalar paquetes usados para la infrastructure en el backend
-- Desinstalar los paquetes/módulos que utilize la infrastructure, los cuales no debe utilizar el backend, utiliza la propiedad `uninstall` de npm o de su empaquetador preferido.
-    - Para este ejemplo puedes utilizar los siguientes comandos:
-        ```bash
-            npm uninstall @prisma/client
-            npm uninstall -D prisma
-        ```
+- Eliminar los paquetes que utiliza `infrastructure` del backend, asegurando que ambos componentes permanezcan independientes. Utilizar comandos como `npm uninstall @prisma/client` y `npm uninstall -D prisma`.
+
 #### Traspasar infrastructure a la raíz
 - Mover la carpeta `infrastructure` de `./backend-express` a `./` (o ruta raíz).
-- A continuación, podemos volver a instalar las dependencias pero esta vez en la carpeta `infrastructure`.
+- A continuación, reinstalar las dependencias pero esta vez en la carpeta `infrastructure`.
     - En este ejemplo, lo haremos a traves del archivo `package.json`, el cual vamos a crear en la carpeta `infrastructure` con el siguiente código:
         ```json
         {
@@ -53,7 +50,7 @@ Para ello, infrastructure tiene sus propios `node_modules`, los cuales, son comp
         ```
     - Ahora hay una carpeta `node_modules` en `infrastructure`: `./infrastructure/node_modules`
 #### Configurar tsconfig.json
-- Unificar lógica de los `tsconfig.json`. Para ello, crearemos un tsconfig.json en cada carpeta de la ruta raíz (`infrastructure`, `core`, `backend-express`).
+- Crear un archivo `tsconfig.json` en cada carpeta (`infrastructure`, `core`, `backend-express`).
     - Por ahora si no tienes requerimientos especiales utiliza este template en las tres carpetas:
         ```json
         {
@@ -79,14 +76,14 @@ Para ello, infrastructure tiene sus propios `node_modules`, los cuales, son comp
     - Mas adelante, se modifica el tsconfig.json para adaptar-se concretamente a esta estructura.
 
 #### Reestructurar Prisma
-- Apuntar a la nueva ruta del `@prisma/client` en el `schema.prisma`.
+- Actualizar la ruta de `@prisma/client` en el nuevo `schema.prisma`, y ejecutar comandos de generación y migración para asegurar que todo funcione correctamente.
     - Para esto podemos simplemente borrar el output añadido en el [Punto 1. Migración `backend-express/prisma` -> `backend-express/infrastructure/prisma`](#añadirmodificar-output-en-schemaprisma)
-- Después, actualiza Prisma, generando y migrando.
-    - Para este ejemplo, puedes utilizar los siguientes comandos:
-        ```bash
-            npx prisma generate
-            npx prisma migrate dev
-        ```
+    - Después, actualiza Prisma, generando y migrando.
+        - Para este ejemplo, puedes utilizar los siguientes comandos:
+            ```bash
+                npx prisma generate
+                npx prisma migrate dev
+            ```
         
 ### Cambio estructura
 #### Antigua estructura
@@ -174,3 +171,32 @@ project/
 │   └── ... (sin cambios)
 └── tsconfig.json ❌⚠️
 ```
+
+## 3. Añadir jest al `core`
+### Objetivo principal
+Integrar pruebas unitarias en el `core` de la aplicación, garantizando la independencia de su lógica y demostrando los beneficios que las pruebas aportan a la arquitectura general. 
+### Detalles
+#### Configuración jest
+- Instalar las dependencias necesarias para ejecutar el testing en la carpeta `core`
+    - Primero, asegúrate de tener Jest configurado en tu proyecto. Si no lo tienes, puedes instalarlo con los siguientes comandos una vez situado en la carpeta `core`:
+        ```bash
+        npm install --save-dev jest ts-jest @types/jest
+        ```
+    - Luego, crea un archivo de configuración jest.config.js si no lo tienes aún:
+        ```js
+        module.exports = {
+            preset: 'ts-jest',
+            testEnvironment: 'node',
+            moduleNameMapper: {
+            '^application/(.*)$': '<rootDir>/application/$1',
+            '^domain/(.*)$': '<rootDir>/domain/$1',
+            },
+            roots: ['<rootDir>/test'], // Asegúrate de que Jest busque en esta carpeta
+        };
+        ```
+    - Para terminar, recuerda añadir la carpeta test al include del `tsconfig.json` del `core`.
+#### Test, fix and repeat
+- Ejecuta las pruebas y corrige los problemas que puedan afectar la independencia del `core`, asegurándote de que las funciones operen como se espera. Durante este proceso, es posible que notes lo siguiente:
+    - La entidad `LikePost` no estaba definida, lo que impedía que las pruebas se completaran correctamente.
+    - Las operaciones de actualización no verificaban la existencia de la entidad, lo cual es una buena práctica y debe implementarse.
+
