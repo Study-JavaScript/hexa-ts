@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { PrismaPostRepository } from "../../infrastructure/repositories/prisma-post";
+import { PrismaPostRepository } from "../../../infrastructure/repositories/prisma-post";
 import { FindDbError, UnauthorizedError } from "../../../core/domain/errors/main";
 import { Post } from "../../../core/domain/entities/Post";
 import { UserJWT } from "../../express";

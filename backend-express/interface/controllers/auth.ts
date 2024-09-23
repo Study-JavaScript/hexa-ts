@@ -1,8 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import dotenv from "dotenv"
 import { SetEnvError, UnauthorizedError } from '../../../core/domain/errors/main';
 import { CustomJwtPayload } from '../../express';
 import { userRepository } from './user';
+
+dotenv.config()
 
 const secretKey = process.env.JWT_SECRET;
 

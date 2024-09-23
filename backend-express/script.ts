@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../infrastructure/node_modules/@prisma/client'
 import bcrypt from 'bcryptjs';
 
 

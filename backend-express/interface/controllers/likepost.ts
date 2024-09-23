@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { PrismaLikePostRepository } from "../../infrastructure/repositories/prisma-likepost";
+import { PrismaLikePostRepository } from "../../../infrastructure/repositories/prisma-likepost";
 import { UnauthenticatedError } from "../../../core/domain/errors/main";
 const likePostRepository = new PrismaLikePostRepository()
 export class LikePostController {
