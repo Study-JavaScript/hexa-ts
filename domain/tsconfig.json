@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "module": "CommonJS",
-      "target": "ES2020",
-      // "rootDir": "../", // ❓ Establece la carpeta raíz, sino la raíz es donde esta tsconfig.json
-      "lib": [ "esnext"],
-      // "lib": ["dom", "esnext"], // ✅⚠️ Biblotecas de tipos que importara ❓
-      // "moduleResolution": "node", // ✅ Resolucion de modulos
-      // "resolveJsonModule": true, // ✅ Permite importar archivos json 
-      "esModuleInterop": true, // ✅ Interoperabilidad entre CommonJS y ES6
-      "skipLibCheck": true, // ❓ Omitir verificación de tipos en .d.ts
-      "strict": true, 
-      "forceConsistentCasingInFileNames": true // ✅ Forzar mayúsculas y minúsculas en nombres de archivo
-    },
-    "include": ["./entities", "./errors", "../infrastructure"]
-  }
-  
+  "compilerOptions": {
+    // "baseUrl": ".",
+    // "outDir": "./dist",
+    // "rootDir": ".",
+    "module": "CommonJS",
+    "target": "ES2020",
+    "lib": ["esnext"],
+    "strict": true,
+    "composite": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "emitDeclarationOnly": false
+  },
+  "include": ["./entities", "./errors"]
+}

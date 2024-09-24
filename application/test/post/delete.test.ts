@@ -1,7 +1,5 @@
-// test/post/DeletePost.test.ts
-
-import { PostRepository } from "repositories/post";
-import { DeletePost } from "usecases/atomic/post";
+import { PostRepository } from "../../repositories/post";
+import { DeletePost } from "../../usecases/atomic/post";
 
 
 

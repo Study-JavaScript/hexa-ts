@@ -1,8 +1,9 @@
 // test/post/ReadAllPosts.test.ts
 
-import { PostRepository } from "repositories/post";
-import { ReadAllPosts } from "usecases/atomic/post";
+
 import { Post } from "../../../domain/entities/Post";
+import { PostRepository } from "../../repositories/post";
+import { ReadAllPosts } from "../../usecases/atomic/post";
 
 // Mock del repositorio
 const mockPostRepository = (): jest.Mocked<PostRepository> => ({

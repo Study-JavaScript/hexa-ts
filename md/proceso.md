@@ -178,11 +178,11 @@ Integrar pruebas unitarias en el `core` de la aplicación, garantizando la indep
 ### Detalles
 #### Configuración jest
 - Instalar las dependencias necesarias para ejecutar el testing en la carpeta `core`
-    - Primero, asegúrate de tener Jest configurado en tu proyecto. Si no lo tienes, puedes instalarlo con los siguientes comandos una vez situado en la carpeta `core`:
+    - Primero, asegurar tener Jest configurado en tu proyecto. Si no lo tienes, puedes instalarlo con los siguientes comandos una vez situado en la carpeta `core`:
         ```bash
         npm install --save-dev jest ts-jest @types/jest
         ```
-    - Luego, crea un archivo de configuración jest.config.js si no lo tienes aún:
+    - Luego, crear un archivo de configuración jest.config.js si no lo tienes aún:
         ```js
         module.exports = {
             preset: 'ts-jest',
@@ -194,15 +194,142 @@ Integrar pruebas unitarias en el `core` de la aplicación, garantizando la indep
             roots: ['<rootDir>/test'], // Asegúrate de que Jest busque en esta carpeta
         };
         ```
-    - Para terminar, recuerda añadir la carpeta test al include del `tsconfig.json` del `core`.
+    - Para terminar, añade la carpeta test al include del `tsconfig.json` del `core`.
 #### Test, fix and repeat
-- Ejecuta las pruebas y corrige los problemas que puedan afectar la independencia del `core`, asegurándote de que las funciones operen como se espera. Durante este proceso, es posible que notes lo siguiente:
+- Ejecutar las pruebas y corrige los problemas que puedan afectar la independencia del `core`, asegurándote de que las funciones operen como se espera. Durante este proceso, es posible que notes lo siguiente:
     - La entidad `LikePost` no estaba definida, lo que impedía que las pruebas se completaran correctamente.
     - Las operaciones de actualización no verificaban la existencia de la entidad, lo cual es una buena práctica y debe implementarse.
 
 ## 4. Mejorar arquitectura
+### Objetivo principal
+Explorar mejoras a la actual arquitectura, obteniendo una mejor consistencia y una mayor independencia en las diferentes partes.
 ### Detalles
-#### Separar la app y el domain a la ruta raíz?
+#### Separar la app y el domain a la ruta raíz
+- Eliminar la carpeta `core`, manteniendo los tests de Jest únicamente en la carpeta `application`. Esto permitirá que las tres partes principales de la arquitectura sean completamente independientes.
+    - Utilizar el Gestor de archivos de tu sistema, el del Entorno de desarrollo (IDE) o la terminal.
+- Configurar los archivos `tsconfig.json` para que se adapten correctamente a la nueva estructura de carpetas.
+    - Probar distintas combinaciones hasta encontrar la que mejor se adapta a las importaciones.
 #### Traspasar entities de classes a tipos
 #### Tratar correctamente los casos de uso / repository
 (post.canceled)
+### Cambio estructura
+#### Estructura antigua
+```
+project/
+├── core/
+│   ├── domain/
+│   │   ├── entities/
+│   │   │   ├── User.ts
+│   │   │   └── Post.ts
+│   │   └── errors/
+│   │       ├── main.ts
+│   │       └── <others>.ts
+│   └── application/
+│       ├── usecases/
+│       │   ├── CreateUserUseCase.ts ⚠️🖊️
+│       │   └── CreatePostUseCase.ts ⚠️🖊️
+│       ├── repositories/
+│       │   ├── user.d.ts
+│       │   └── post.d.ts
+│       ├── services/
+│       │   ├── email.d.ts
+│       │   └── auth.d.ts
+│       └── ports/ ❓🖊️
+│           ├── in/
+│           │   └── UserControllerPort.ts
+│           └── out/
+│               └── UserPersistencePort.ts
+├── infrastructure/
+│   ├── prisma/
+│   │   └── schema.prisma
+│   ├── repositories/
+│   │   ├── prisma-user.ts
+│   │   └── prisma-post.ts
+│   ├── config/
+│   │   └── prisma-db.ts
+│   ├── package.json
+│   └── tsconfig.json
+├── backend/
+│   └── interfaces/ 
+│       ├── controllers/
+│       │   └── ExpressUserController.ts
+│       └── routes/
+│           └── userRoutes.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── ...
+├── frontend/
+│   ├── src/
+|   │   └── ...
+|   ├── package.json
+|   └── tsconfig.json
+    
+```
+
+<div align="center">
+⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+</div>
+
+#### Estructura actual
+```
+project/
+├── domain/
+│   ├── entities/
+│   │   ├── User.ts
+│   │   └── Post.ts
+│   ├── errors/
+│   │   ├── MainError.ts
+│   │   └── <other-errors>.ts
+│   └── tsconfig.json
+├── application/
+│   ├── usecases/
+│   │   ├── CreateUserUseCase.ts ⚠️🖊️
+│   │   └── CreatePostUseCase.ts ⚠️🖊️
+│   ├── repositories/
+│   │   ├── IUserRepository.ts
+│   │   └── IPostRepository.ts
+│   ├── services/ ❓⚠️
+│   │   ├── IEmailService.ts
+│   │   └── IAuthService.ts
+│   ├── test/
+│   │   ├── user/
+│   │   │   └── createUser.test.ts
+│   │   └── post/
+│   │       └── updatePost.test.ts
+│   ├── ports/ ❓🖊️
+│   │   ├── in/
+│   │   │   └── IUserControllerPort.ts
+│   │   └── out/
+│   │       └── IUserPersistencePort.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── ...
+├── infrastructure/
+│   ├── prisma/
+│   │   └── schema.prisma
+│   ├── repositories/
+│   │   ├── PrismaUserRepository.ts
+│   │   └── PrismaPostRepository.ts
+│   ├── config/
+│   │   └── PrismaDbConfig.ts
+│   ├── package.json
+│   ├── .env
+│   ├── tsconfig.json
+│   └── node_modules
+├── backend/
+│   └── interfaces/
+│       ├── controllers/
+│       │   └── ExpressUserController.ts
+│       ├── routes/
+│       │   └── UserRoutes.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── ...
+├── frontend/
+│   ├── src/
+│   │   └── ...
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── ...
+
+```

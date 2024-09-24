@@ -1,6 +1,7 @@
-import { UserRepository } from "repositories/user";
-import { UpdateUser } from "usecases/atomic/user";
+
 import { User } from "../../../domain/entities/User";
+import { UserRepository } from "../../repositories/user";
+import { UpdateUser } from "../../usecases/atomic/user";
 
 // Mock del repositorio
 const mockUserRepository = (): jest.Mocked<UserRepository> => ({

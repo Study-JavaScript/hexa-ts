@@ -9,6 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["./prisma", "./repositories", "./connectors", "../domain", "../application"],
+  "include": [ "./repositories", "./connectors", "../domain", "../application"],
   "exclude": ["node_modules"]
 }

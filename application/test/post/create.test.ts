@@ -1,8 +1,9 @@
 // test/post/CreatePost.test.ts
 
-import { PostRepository } from "repositories/post";
-import { CreatePost } from "usecases/atomic/post";
+
 import { Post } from "../../../domain/entities/Post";
+import { PostRepository } from "../../repositories/post";
+import { CreatePost } from "../../usecases/atomic/post";
 
 
 

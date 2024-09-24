@@ -1,5 +1,5 @@
-import { LikePostRepository } from "repositories/likepost";
 import { LikePost } from "../../../domain/entities/LikePost";
+import { LikePostRepository } from "../../repositories/likepost";
 
 abstract class UseCaseBase {
     constructor(protected likePostRepository: LikePostRepository){}

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
+      // "baseUrl": ".",
       "module": "CommonJS",
       "target": "ES2020",
       // "rootDir": "../", // ❓ Establece la carpeta raíz, sino la raíz es donde esta tsconfig.json
@@ -13,6 +13,7 @@
       "strict": true, 
       "forceConsistentCasingInFileNames": true // ✅ Forzar mayúsculas y minúsculas en nombres de archivo
     },
-    "include": ["./usecases", "./repositories", "./test", "../domain"]
+    "include": ["./usecases", "./repositories", "./test", "../domain"],
+    "exclude": ["node_modules"]
   }
   
