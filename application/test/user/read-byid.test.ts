@@ -1,5 +1,5 @@
-import { UserRepository } from "application/repositories/user";
-import { ReadById } from "application/usecases/atomic/user";
+import { UserRepository } from "repositories/user";
+import { ReadById } from "usecases/atomic/user";
 import { User } from "../../../domain/entities/User";
 
 // Mock del repositorio

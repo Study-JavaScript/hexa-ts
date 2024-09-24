@@ -1,8 +1,9 @@
 // test/likePost/CreateLikePost.test.ts
 
-import { LikePostRepository } from "application/repositories/likepost";
-import { CreateLikePost } from "application/usecases/atomic/likepost";
+
+import { LikePostRepository } from "repositories/likepost";
 import { LikePost } from "../../../domain/entities/LikePost";
+import { CreateLikePost } from "usecases/atomic/likepost";
 
 
 

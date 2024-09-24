@@ -1,7 +1,7 @@
 // test/post/ReadAllPosts.test.ts
 
-import { PostRepository } from "application/repositories/post";
-import { ReadAllPosts } from "application/usecases/atomic/post";
+import { PostRepository } from "repositories/post";
+import { ReadAllPosts } from "usecases/atomic/post";
 import { Post } from "../../../domain/entities/Post";
 
 // Mock del repositorio

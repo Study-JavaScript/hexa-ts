@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import dotenv from "dotenv"
 
 
-import {ReadAll, ReadByEmail, ReadById} from "../../../core/application/usecases/atomic/user"
+import {ReadAll, ReadByEmail, ReadById} from "../../../application/usecases/atomic/user"
 import {FindDbError, InvalidUrlError, SetEnvError, UnauthorizedError} from "../../../domain/errors/main"
 import { PrismaUserRepository } from "../../../infrastructure/repositories/prisma-user";
 import { User } from "../../../domain/entities/User";

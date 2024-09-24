@@ -1,7 +1,7 @@
-import { FindDbError } from "../../../../domain/errors/main";
 import { UserRepository } from "../../../application/repositories/user";
-import { User } from "../../../../domain/entities/User";
-// import { User } from ".../../core/domain/entities/User";
+import { User } from "../../../domain/entities/User";
+import { FindDbError } from "../../../domain/errors/main";
+
 
 abstract class UseCaseBase {
     constructor(protected userRepository: UserRepository){}
