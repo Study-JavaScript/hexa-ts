@@ -225,8 +225,7 @@ Explorar mejoras a la actual arquitectura, obteniendo una mejor consistencia y u
         ```
         - De esta forma, evitamos el siguiente error:
             ![Error en application, al cambiar las entities de classes a tipos](./img/type.error-entitie-fromclasstotype.png)
-#### Tratar correctamente los casos de uso / repository
-(post.canceled)
+
 ### Cambio estructura
 
 <details><summary><h4 align="center"> Estructura antigua</h4></summary>
