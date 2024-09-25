@@ -1,5 +1,4 @@
-
-import { User } from "../../../domain/entities/User";
+import { User } from "../../../domain/entities/user";
 import { UserRepository } from "../../repositories/user";
 import { ReadByEmail } from "../../usecases/atomic/user";
 
@@ -16,7 +15,14 @@ describe('ReadByEmail UseCase', () => {
   it('should return a user by email', async () => {
     const userRepository = mockUserRepository();
 
-    const mockUser = new User(1, 'test@example.com', 'password123', 'Test User');
+    const mockUser: User = {
+      id: 1,
+      email: 'test@example.com',
+      password: 'password123',
+      name: 'Test User',
+      role: 'USER',
+      banned: false
+    };
     userRepository.readByEmail.mockResolvedValue(mockUser);
 
     const readByEmail = new ReadByEmail(userRepository);

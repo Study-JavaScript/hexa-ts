@@ -86,7 +86,7 @@ Para ello, infrastructure tiene sus propios `node_modules`, los cuales, son comp
             ```
         
 ### Cambio estructura
-#### Antigua estructura
+<details><summary><h4 align="center"> Estructura antigua</h4></summary>
 
 ```
 project/
@@ -138,11 +138,12 @@ project/
 └── tsconfig.json
     
 ```
+</details><br/>
 <div align="center">
 ⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 </div>
 
-#### Estructura actual
+<details><summary><h4 align="center"> Estructura actual</h4></summary>
 
 ```
 project/
@@ -171,6 +172,7 @@ project/
 │   └── ... (sin cambios)
 └── tsconfig.json ❌⚠️
 ```
+</details><br/>
 
 ## 3. Añadir jest al `core`
 ### Objetivo principal
@@ -209,11 +211,26 @@ Explorar mejoras a la actual arquitectura, obteniendo una mejor consistencia y u
     - Utilizar el Gestor de archivos de tu sistema, el del Entorno de desarrollo (IDE) o la terminal.
 - Configurar los archivos `tsconfig.json` para que se adapten correctamente a la nueva estructura de carpetas.
     - Probar distintas combinaciones hasta encontrar la que mejor se adapta a las importaciones.
+    - Utilizar las propiedades include y exclude para indicar las partes a incluir y excluir en cada carpeta.
+- **La jerarquía actual para la importación de tipos** se establece de la siguiente manera, donde **los niveles superiores no dependen de clases ni tipos de los niveles inferiores:**
+    1. Domain
+    2. Application
+    3. Infrastructure
+    4. Backend
 #### Traspasar entities de classes a tipos
+- Cambiar las entities para en vez de usar classes usar tipos, ya que no estamos utilizando métodos en las classes.
+    - Configuramos el tsconfig.json de la application para que no fuerce las mayúsculas.
+        ```json
+          "forceConsistentCasingInFileNames": false // ✅ Forzar mayúsculas y minúsculas en nombres de archivo
+        ```
+        - De esta forma, evitamos el siguiente error:
+            ![Error en application, al cambiar las entities de classes a tipos](./img/type.error-entitie-fromclasstotype.png)
 #### Tratar correctamente los casos de uso / repository
 (post.canceled)
 ### Cambio estructura
-#### Estructura antigua
+
+<details><summary><h4 align="center"> Estructura antigua</h4></summary>
+
 ```
 project/
 ├── core/
@@ -266,11 +283,15 @@ project/
     
 ```
 
+</details> <br/>
+
 <div align="center">
 ⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 </div>
 
-#### Estructura actual
+<details><summary><h4 align="center"> Estructura actual</h4></summary>
+
+
 ```
 project/
 ├── domain/
@@ -333,3 +354,5 @@ project/
 │   └── ...
 
 ```
+
+</details><br/>

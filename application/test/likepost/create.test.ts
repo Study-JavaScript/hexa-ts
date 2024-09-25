@@ -1,4 +1,4 @@
-import { LikePost } from "../../../domain/entities/LikePost";
+import { LikePost } from "../../../domain/entities/likepost";
 import { LikePostRepository } from "../../repositories/likepost";
 import { CreateLikePost } from "../../usecases/atomic/likepost";
 
@@ -14,7 +14,7 @@ describe('CreateLikePost UseCase', () => {
     it('should create a like for a post and return it', async () => {
         const likePostRepository = mockLikePostRepository();
 
-        const newLikePost = new LikePost(1, 1, 1, new Date());
+        const newLikePost: LikePost = {id:1, userId:1, postId:1, createdAt:new Date()};
         likePostRepository.create.mockResolvedValue(newLikePost);
 
         const createLikePost = new CreateLikePost(likePostRepository);

@@ -1,4 +1,3 @@
-
 import { User } from "../../../domain/entities/User";
 import { UserRepository } from "../../repositories/user";
 import { UpdateUser } from "../../usecases/atomic/user";
@@ -16,8 +15,24 @@ describe('UpdateUser UseCase', () => {
   it('should update an existing user and return the updated user', async () => {
     const userRepository = mockUserRepository();
 
-    const existingUser = new User(1, 'user@example.com', 'oldPassword', 'Old Name');
-    const updatedUser = new User(1, 'user@example.com', 'newPassword', 'New Name');
+    const existingUser: User = {
+      id: 1,
+      email: 'user@example.com',
+      password: 'oldPassword',
+      name: 'Old Name',
+      role: 'USER',
+      banned: false
+    };
+
+    const updatedUser: User = {
+      id: 1,
+      email: 'user@example.com',
+      password: 'newPassword',
+      name: 'New Name',
+      role: 'USER',
+      banned: false
+    };
+
     userRepository.readById.mockResolvedValue(existingUser);
     userRepository.update.mockResolvedValue(updatedUser);
 

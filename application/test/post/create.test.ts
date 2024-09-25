@@ -1,11 +1,7 @@
 // test/post/CreatePost.test.ts
-
-
-import { Post } from "../../../domain/entities/Post";
+import { Post } from "../../../domain/entities/post";
 import { PostRepository } from "../../repositories/post";
 import { CreatePost } from "../../usecases/atomic/post";
-
-
 
 // Mock del repositorio
 const mockPostRepository = (): jest.Mocked<PostRepository> => ({
@@ -20,7 +16,7 @@ describe('CreatePost UseCase', () => {
     const postRepository = mockPostRepository();
 
     const postData = { title: 'New Post', content: 'Content of the post' };
-    const newPost = new Post(1, 'New Post', 'Content of the post',false, 1);
+    const newPost: Post = { id: 1, title: 'New Post', content: 'Content of the post', deleted: false, authorId: 1 };
 
     postRepository.create.mockResolvedValue(newPost);
 

@@ -1,7 +1,6 @@
+// test/post/DeletePost.test.ts
 import { PostRepository } from "../../repositories/post";
 import { DeletePost } from "../../usecases/atomic/post";
-
-
 
 // Mock del repositorio
 const mockPostRepository = (): jest.Mocked<PostRepository> => ({

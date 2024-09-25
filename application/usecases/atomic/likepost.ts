@@ -1,4 +1,4 @@
-import { LikePost } from "../../../domain/entities/LikePost";
+import { LikePost } from "../../../domain/entities/likepost";
 import { LikePostRepository } from "../../repositories/likepost";
 
 abstract class UseCaseBase {

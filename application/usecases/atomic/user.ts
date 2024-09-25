@@ -1,5 +1,5 @@
 import { UserRepository } from "../../../application/repositories/user";
-import { User } from "../../../domain/entities/User";
+import { User } from "../../../domain/entities/user";
 import { FindDbError } from "../../../domain/errors/main";
 
 

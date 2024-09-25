@@ -1,7 +1,5 @@
 // test/post/ReadAllPosts.test.ts
-
-
-import { Post } from "../../../domain/entities/Post";
+import { Post } from "../../../domain/entities/post";
 import { PostRepository } from "../../repositories/post";
 import { ReadAllPosts } from "../../usecases/atomic/post";
 
@@ -17,9 +15,9 @@ describe('ReadAllPosts UseCase', () => {
   it('should return all posts', async () => {
     const postRepository = mockPostRepository();
 
-    const mockPosts = [
-      new Post(1, 'Post 1', 'Content 1',false, 1),
-      new Post(2, 'Post 2', 'Content 2',false, 1),
+    const mockPosts: Post[] = [
+      { id: 1, title: 'Post 1', content: 'Content 1', deleted: false, authorId: 1 },
+      { id: 2, title: 'Post 2', content: 'Content 2', deleted: false, authorId: 1 },
     ];
     postRepository.readAll.mockResolvedValue(mockPosts);
 
