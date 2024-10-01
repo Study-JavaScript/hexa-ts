@@ -14,7 +14,6 @@ Proyecto para explorar conceptos y técnicas útiles especialmente en arquitectu
 
 ### Guía de inicio
 #### Pre requisitos
-Para un proyecto web, un clásico "Getting Started" en castellano podría estructurarse de la siguiente manera:
 
 - **Node.js**: Asegúrate de tener la última versión instalada. Puedes descargarla desde [nodejs.org](https://nodejs.org).
 - **Un gestor de paquetes**: Generalmente, utilizamos npm (incluido con Node.js) o Yarn.
@@ -60,25 +59,16 @@ Para un proyecto web, un clásico "Getting Started" en castellano podría estruc
     ```bash
     npm i
     ```
-
-8. **Ejecutar servidor**:
-    ```bash
-    npx ts-node index
-    ```
-
-
 #### Ejecución del Proyecto
+
+
+
+
 
 Una vez que hayas instalado las dependencias, puedes iniciar el servidor de desarrollo:
 
 ```bash
-npm start
-```
-
-O con Yarn:
-
-```bash
-yarn start
+npx ts-node index
 ```
 
 El proyecto debería estar corriendo en `http://localhost:3000` (o en el puerto que hayas configurado).
@@ -89,6 +79,8 @@ El proyecto debería estar corriendo en `http://localhost:3000` (o en el puerto 
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - [dotenv](https://www-dotenv-org.webpkgcache.com/doc/-/s/www.dotenv.org/docs/)
+- [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
+- [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc)
 - [cors](https://www.npmjs.com/package/cors#usage)
 - [**prisma**](https://www.prisma.io/docs)
 - [**typescript**](https://www.typescriptlang.org/docs/)
@@ -157,6 +149,8 @@ project/
 
 
 ## [Recursos](https://github.com/SKRTEEEEEE/markdowns)
+
+- [Documentación sobre `jsdocs`](https://www.npmjs.com/package/swagger-jsdoc)
 
 ## Contacto
 

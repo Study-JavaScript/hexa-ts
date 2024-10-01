@@ -1,11 +1,18 @@
-
 import express,{ Application, NextFunction, Request, Response } from "express";
+// import swaggerUi from "swagger-ui-express";
+
 import { NoAuthenticateRouter, UserRouter } from "./user";
 import { PostRouter } from "./post";
 import { authenticateJWT, authorizeAdmin } from "../controllers/auth";
 import { LikePostRouter } from "./likepost";
+// import { swaggerDocs } from "../controllers/swagger";
 
 export const setupRoutes = (app: Application) => {
+
+
+  // Servir Swagger UI
+  // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
   app.use(express.json());
   app.use(NoAuthenticateRouter)
   // app.use((req, res, next) => {

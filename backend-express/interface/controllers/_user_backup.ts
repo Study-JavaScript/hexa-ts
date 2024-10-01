@@ -1,19 +1,15 @@
-
-
-
 import { NextFunction, Request, Response } from "express";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import dotenv from "dotenv"
 
+
 import { ReadAll, ReadByEmail, ReadById } from "../../../application/usecases/atomic/user"
 import { FindDbError, InvalidUrlError, SetEnvError, UnauthorizedError } from "../../../domain/errors/main"
 import { PrismaUserRepository } from "../../../infrastructure/repositories/prisma-user";
 import { User } from "../../../domain/entities/user";
-
 export const userRepository = new PrismaUserRepository()
 dotenv.config()
-
 /**
  * @swagger
  * components:
@@ -31,63 +27,41 @@ dotenv.config()
  *           type: string
  *         banned:
  *           type: boolean
- *       example:
- *         id: 1
- *         email: "user@example.com"
- *         name: "John Doe"
- *         role: "USER"
- *         banned: false
  */
 
 export class UserController {
     constructor() {
         this.read = this.read.bind(this);
-        this.readerBy = this.readerBy.bind(this);
+        this.readerBy = this.readerBy.bind(this)
     }
 
+    // Porque no funciona ❓ 🧠 ⬇️
+
+    // private userRepository: UserRepository;
+    // constructor(){this._userRepository=this.initialize()}
+    // initialize(){
+    //     return new PrismaUserRepository(prisma)
+    // }
+
+    // private userRepository: UserRepository;
+    // constructor() {
+    //     this.userRepository = new PrismaUserRepository();
+    // }
     /**
       * @swagger
       * /login:
       *   post:
-      *     summary: Iniciar sesión de un usuario
-      *     tags: [Authentication]
-      *     requestBody:
-      *       required: true
-      *       content:
-      *         application/json:
-      *           schema:
-      *             type: object
-      *             properties:
-      *               email:
-      *                 type: string
-      *               password:
-      *                 type: string
-      *             required:
-      *               - email
-      *               - password
-      *             example:
-      *               email: "user@example.com"
-      *               password: "password123"
-      *     responses:
-      *       200:
-      *         description: Token generado exitosamente
-      *         content:
-      *           application/json:
-      *             schema:
-      *               type: object
-      *               properties:
-      *                 token:
-      *                   type: string
-      *       401:
-      *         description: Credenciales inválidas
+      *   summary: Login a usuario
+      *   tags: [Authentication]
       */
     async login(req: Request, res: Response, next: NextFunction): Promise<void> {
         const { email, password } = req.body;
         try {
             const user = await userRepository.readByEmail(email);
             if (user && (await bcrypt.compare(password, user.password))) {
-                const secret = process.env.JWT_SECRET;
-                if (!secret) throw new SetEnvError("JWT_SECRET");
+                // res.json(user);
+                const secret = process.env.JWT_SECRET
+                if (!secret) throw new SetEnvError("JWT_SECRET")
                 const token = jwt.sign({ id: user.id, role: user.role }, secret, { expiresIn: '1h' });
                 res.json({ token });
             } else {
@@ -97,43 +71,17 @@ export class UserController {
             next(error);
         }
     }
-
     /**
      * @swagger
      * /signup:
      *   post:
-     *     summary: Registrar un nuevo usuario
-     *     tags: [Authentication]
-     *     requestBody:
-     *       required: true
-     *       content:
-     *         application/json:
-     *           schema:
-     *             type: object
-     *             properties:
-     *               name:
-     *                 type: string
-     *               email:
-     *                 type: string
-     *               password:
-     *                 type: string
-     *             required:
-     *               - name
-     *               - email
-     *               - password
-     *             example:
-     *               name: "John Doe"
-     *               email: "user@example.com"
-     *               password: "password123"
-     *     responses:
-     *       201:
-     *         description: Usuario creado exitosamente
-     *       400:
-     *         description: Error en los datos ingresados
+     *   summary: Registro de nuevo usuario
+     *   tags: [Authentication]
      */
     async register(req: Request, res: Response, next: NextFunction): Promise<void> {
         const { name, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
+
         try {
             const user = await userRepository.create({ name, email, password: hashedPassword });
             res.status(201).json(user);
@@ -141,51 +89,30 @@ export class UserController {
             next(error);
         }
     }
-
     /**
      * @swagger
      * /users/{type}:
      *   get:
-     *     summary: Obtener usuarios filtrados por tipo (id o email)
-     *     tags: [Users]
-     *     parameters:
-     *       - in: path
-     *         name: type
-     *         schema:
-     *           type: string
-     *         required: true
-     *         description: Tipo de búsqueda ('id' o 'email')
-     *       - in: query
-     *         name: q
-     *         schema:
-     *           type: string
-     *         required: true
-     *         description: Parámetro de búsqueda
-     *     responses:
-     *       200:
-     *         description: Usuario encontrado
-     *       400:
-     *         description: Falta el parámetro de búsqueda o tipo inválido
-     *       404:
-     *         description: Usuario no encontrado
+     *   summary: Obtener usuarios filtrados por tipo
+     *   tags: [Users]
      */
     async read(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const type = req.params.type;
-        const searchParam = req.query.q as string | undefined;
+        const type = req.params.type
+        const searchParam = req.query.q as string | undefined
         try {
             if (!searchParam) {
-                res.status(400).json({ message: "Missing search parameter" });
-                throw new InvalidUrlError("Missing search parameter in read");
+                res.status(400).json({ message: "Missing search parameter" })
+                throw new InvalidUrlError("Missing search parameter in read")
             }
             let user: User | null = null;
             if (type === "id") {
-                const r = new ReadById(userRepository);
-                user = await this.readerBy(parseInt(searchParam), r);
+                const r = new ReadById(userRepository)
+                user = await this.readerBy(parseInt(searchParam), r)
             } else if (type === "email") {
-                const r = new ReadByEmail(userRepository);
-                user = await this.readerBy(searchParam, r);
+                const r = new ReadByEmail(userRepository)
+                user = await this.readerBy(searchParam, r)
             } else {
-                res.status(400).json({ message: "Invalid read type" });
+                res.status(400).json({ message: "Invalid read type" })
             }
             if (user) {
                 res.json(user);
@@ -193,11 +120,9 @@ export class UserController {
                 res.status(404).json({ message: 'User not found' });
             }
         } catch (error) {
-            next(error);
+            next(error)
         }
     }
-
-   
     private readerBy(searchParam: string | number, r: ReadByEmail | ReadById): Promise<User | null> {
         if (typeof searchParam === "string") {
             const reader = r as ReadByEmail; // En este caso, r será de tipo ReadByEmail
