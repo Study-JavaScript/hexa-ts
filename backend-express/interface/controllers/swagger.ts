@@ -11,7 +11,7 @@ const swaggerOptions = {
             description: 'Documentación de la API usada como ejemplo de desarrollo para arquitectura hexagonal',
             contact: {
                 name: "SKRTEEEEEE",
-                url: "profile-skrt.vercel.app",
+                url: "https://profile-skrt.vercel.app",
                 email: "adanreh.m@gmail.com"
             }
         },

@@ -48,80 +48,85 @@ export class UserController {
         this.readerBy = this.readerBy.bind(this);
     }
 
-/**
- * @swagger
- * /login:
- *   post:
- *     summary: Iniciar sesión de un usuario
- *     tags: [Autenticación]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *                 description: Correo electrónico del usuario
- *               password:
- *                 type: string
- *                 description: Contraseña del usuario
- *             required:
- *               - email
- *               - password
- *             example: 
- *               email: "usuario2@prueba.com"
- *               password: "usuarioprueba2" 
- * 
- *             examples: # no esta funcionando
- *               admin:
- *                 summary: Ejemplo de login para administrador
- *                 value: 
- *                   email: "firstAdmin@prisma.io"
- *                   password: "firstAdmin"
- *               user:
- *                 summary: Ejemplo de login para usuario regular
- *                 value:
- *                   email: "usuario2@prueba.com"
- *                   password: "usuarioprueba2"     
- *   
- *     responses:
- *       200:
- *         description: Token generado exitosamente
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *                   description: El token JWT para autenticación
- *       401:
- *         description: Credenciales inválidas
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Mensaje de error
- *             example:
- *               message: "Credenciales inválidas"
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Mensaje de error
- *             example:
- *               message: "Error interno del servidor"
- */
+    /**
+     * @swagger
+     * /login:
+     *   post:
+     *     summary: 🔐 Iniciar sesión
+     *     description: <h4>Iniciar sesión para un usuario.</h4><br/> Este endpoint permite iniciar sesión con las credenciales del usuario.
+     *     tags: [Autenticación]
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               email:
+     *                 type: string
+     *                 description: Correo electrónico del usuario
+     *               password:
+     *                 type: string
+     *                 description: Contraseña del usuario
+     *             required:
+     *               - email
+     *               - password
+     *           examples:
+     *             Admin:
+     *               summary: Ejemplo de login para administrador
+     *               value: 
+     *                   email: "firstAdmin@prisma.io"
+     *                   password: "firstAdmin"
+     *             User:
+     *                 summary: Ejemplo de login para usuario regular
+     *                 value:
+     *                   email: "usuario2@prueba.com"
+     *                   password: "usuarioprueba2"     
+     *   
+     *     responses:
+     *       200:
+     *         description: Token generado exitosamente
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 token:
+     *                   type: string
+     *                   description: El token JWT para autenticación
+     *             example:
+     *                 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjkxNzUzMDksImV4cCI6MTcyOTE3ODkwOX0.ZdvVhyhUhkmysJ1u5CQZusaGdk5TvkInKKPmHo_sVLc"
+     *         links: # 🖊️ 🧠 no acabo de entender como funciona, lo dejo para mas adelante
+     *           Authorize:
+     *             operationId: authorizeUser
+     *             description: "Obtener información del usuario autenticado"
+     *             parameters:
+     *                 token: $response.body#/token
+     *       401:
+     *         description: Credenciales inválidas
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 message:
+     *                   type: string
+     *                   description: Mensaje de error
+     *             example:
+     *               message: "Sin autorización: Credenciales inválidas"
+     *       500:
+     *         description: Error interno del servidor
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 message:
+     *                   type: string
+     *                   description: Mensaje de error
+     *             example:
+     *               message: "Error interno del servidor"
+     */
 
     async login(req: Request, res: Response, next: NextFunction): Promise<void> {
         const { email, password } = req.body;
@@ -133,7 +138,7 @@ export class UserController {
                 const token = jwt.sign({ id: user.id, role: user.role }, secret, { expiresIn: '1h' });
                 res.json({ token });
             } else {
-                res.status(401).json({ message: 'Credenciales inválidas' });
+                res.status(401).json({ message: 'Sin autorización: Credenciales inválidas' });
             }
         } catch (error) {
             next(error);
@@ -145,7 +150,8 @@ export class UserController {
      * @swagger
      * /signup:
      *   post:
-     *     summary: Registrar un nuevo usuario
+     *     summary: 👨‍💻 Registrar usuario
+     *     description: <h4>Registrar un nuevo usuario.</h4><br/> Este endpoint permite registrar un nuevo usuario.
      *     tags: [Autenticación]
      *     requestBody:
      *       required: true
@@ -224,13 +230,15 @@ export class UserController {
      * @swagger
      * /users/{type}:
      *   get:
-     *     summary: Obtener usuarios filtrados por tipo (id o email)
+     *     summary: 🔎 Buscar usuario
+     *     description: <h4> Obtener usuario filtrados por tipo (id o email).</h4><br/> Este endpoint permite buscar la información de un usuario en especifico, buscando-lo por id o por email. <br/> El campo `q` o "Parámetro de búsqueda" se refiere al dato por el que se buscara al usuario, si se escoge email en el tipo de filtrado, este dato deberá ser el email del cual estamos buscando. Si se escoge id, el id del usuario el cual se quiere obtener información"
      *     tags: [Users]
      *     parameters:
      *       - in: path
      *         name: type
      *         schema:
      *           type: string
+     *           enum: [id, email]
      *         required: true
      *         description: Tipo de búsqueda ('id' o 'email')
      *       - in: query
@@ -240,12 +248,20 @@ export class UserController {
      *         required: true
      *         description: Parámetro de búsqueda
      *     security:
-     *       - bearerAuth: []  # Esta línea añade la seguridad JWT solo a esta ruta
+     *       - bearerAuth: [] 
      *     responses:
      *       200:
      *         description: Usuario encontrado
+     *         content: 
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/User'
      *       400:
      *         description: Falta el parámetro de búsqueda o tipo inválido
+     *       401: 
+     *         $ref: '#/components/responses/AuthError'
+     *       403:
+     *          $ref: '#/components/responses/BannedUserError'
      *       404:
      *         description: Usuario no encontrado
      */
@@ -254,7 +270,7 @@ export class UserController {
         const searchParam = req.query.q as string | undefined;
         try {
             if (!searchParam) {
-                res.status(400).json({ message: "Missing search parameter" });
+                res.status(400).json({ message: "Parámetro de búsqueda no recibido" });
                 throw new InvalidUrlError("Missing search parameter in read");
             }
             let user: User | null = null;
@@ -265,12 +281,12 @@ export class UserController {
                 const r = new ReadByEmail(userRepository);
                 user = await this.readerBy(searchParam, r);
             } else {
-                res.status(400).json({ message: "Invalid read type" });
+                res.status(400).json({ message: "Tipo de búsqueda invalida" });
             }
             if (user) {
                 res.json(user);
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ message: 'Usuario no encontrado' });
             }
         } catch (error) {
             next(error);
@@ -288,118 +304,124 @@ export class UserController {
         }
     }
 
-/**
- * @swagger
- * /users/{id}:
- *   put:
- *     summary: Actualizar datos de usuario
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID del usuario a actualizar (que ha iniciado sesión).
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 description: Nuevo nombre del usuario
- *               email:
- *                 type: string
- *                 description: Nuevo correo electrónico del usuario
- *               password:
- *                 type: string
- *                 description: Nueva contraseña del usuario
- *           example:
- *             name: "usuario-prueba2"
- *     responses:
- *       200:
- *         description: Usuario actualizado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: integer
- *                   description: ID del usuario actualizado
- *                 name:
- *                   type: string
- *                   description: Nombre del usuario actualizado
- *                 email:
- *                   type: string
- *                   description: Correo electrónico del usuario actualizado
- *       403:
- *         description: Acceso prohibido, el usuario no está autorizado a realizar esta acción
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Mensaje de error
- *               example:
- *                 message: "Forbidden"
- *       404:
- *         description: Usuario no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Mensaje de error
- *               example:
- *                 message: "User not found"
- *       401:
- *         description: Usuario no autenticado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Mensaje de error
- *               example:
- *                 message: "Unauthorized"
- */
+    /**
+     * @swagger
+     * /users/{id}:
+     *   put:
+     *     summary: 🖊️ Actualizar usuario
+     *     description: <h4> Actualizar datos de usuario.</h4><br/> Este endpoint permite actualizar datos del usuario que ha iniciado sesión (provee token). <br/> Para ello, en el campo `id`, introducir el id del usuario que provee el token. En el "body", podemos introducir los campos que deseemos modificar. 
+     *     tags: [Users]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: id
+     *         required: true
+     *         description: ID del usuario a actualizar (que ha iniciado sesión).
+     *         schema:
+     *           type: integer
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               name:
+     *                 type: string
+     *                 description: Nuevo nombre del usuario
+     *               email:
+     *                 type: string
+     *                 description: Nuevo correo electrónico del usuario
+     *               password:
+     *                 type: string
+     *                 description: Nueva contraseña del usuario
+     *           example:
+     *             name: "usuario-prueba2"
+     *     responses:
+     *       200:
+     *         description: Usuario actualizado
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 id:
+     *                   type: integer
+     *                   description: ID del usuario actualizado
+     *                 name:
+     *                   type: string
+     *                   description: Nombre del usuario actualizado
+     *                 email:
+     *                   type: string
+     *                   description: Correo electrónico del usuario actualizado
+     *       401: 
+     *         $ref: '#/components/responses/AuthError'
+     *       403:
+     *         description: Acceso prohibido, el usuario no esta autorizado a realizar esta acción
+     *         content:
+     *           application/json:
+     *             schema:
+     *               oneOf:
+     *                 - type: object
+     *                   properties:
+     *                     message:
+     *                       type: string
+     *                       description: Respuesta a acción ejecutada por usuario baneado.
+     *                   example:
+     *                     message: "Prohibido. Usuario baneado"
+     *                 - type: object
+     *                   properties:
+     *                     message:
+     *                       type: string
+     *                       description: Respuesta a acción ejecutada por usuario solicitante diferente a usuario a modificar.
+     *                   example:
+     *                     message: "Prohibido. No autorizado a modificar este usuario"
+     *             examples:
+    *               Usuario baneado:
+    *                 $ref: '#/components/responses/BannedUserError'
+    *               ForbiddenError:
+    *                 summary: Usuario no autorizado
+    *                 value:
+    *                   message: "Prohibido. No autorizado a modificar este usuario"
+     *       404:
+     *         description: Usuario no encontrado
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 message:
+     *                   type: string
+     *                   description: Mensaje de error
+     *               example:
+     *                 message: "Sin autorización. Usuario no encontrado"
+     */
 
-async update(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const { name, email, password } = req.body;
-    let hashedPassword;
-    if (password) hashedPassword = await bcrypt.hash(password, 10);
-    try {
-        if (!req.user) {
-            res.status(401).json({ message: 'Unauthorized' });
-            throw new UnauthorizedError("user not set in jwt");
-        }
-        if (req.user.id !== parseInt(req.params.id)) {
-            res.status(403).json({ message: 'Forbidden' });
-            throw new UnauthorizedError("user not authorized");
-        }
+    async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+        const { name, email, password } = req.body;
+        let hashedPassword;
+        if (password) hashedPassword = await bcrypt.hash(password, 10);
+        try {
+            if (!req.user) {
+                res.status(401).json({ message: 'Sin autorización. Token no provisto' });
+                throw new UnauthorizedError("user not set in jwt");
+            }
+            if (req.user.id !== parseInt(req.params.id)) {
+                res.status(403).json({ message: 'Prohibido. No autorizado a modificar este usuario' });
+                throw new UnauthorizedError("user not authorized");
+            }
 
-        const user = await userRepository.update(parseInt(req.params.id), { name, email, password: hashedPassword });
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(404).json({ message: 'User not found' });
+            const user = await userRepository.update(parseInt(req.params.id), { name, email, password: hashedPassword });
+            if (user) {
+                res.json(user);
+            } else {
+                res.status(404).json({ message: 'Sin autorización. Usuario no encontrado' });
+            }
+        } catch (error) {
+            next(error);
         }
-    } catch (error) {
-        next(error);
     }
-}
 
     /**
  * @swagger
@@ -465,15 +487,15 @@ async update(req: Request, res: Response, next: NextFunction): Promise<void> {
  *               example:
  *                 message: "Error interno del servidor"
  */
-async readAll(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const ra = new ReadAll(userRepository);
-    try {
-        const users = await ra.execute();
-        res.status(200).json(users);
-    } catch (error) {
-        next(error);
+    async readAll(req: Request, res: Response, next: NextFunction): Promise<void> {
+        const ra = new ReadAll(userRepository);
+        try {
+            const users = await ra.execute();
+            res.status(200).json(users);
+        } catch (error) {
+            next(error);
+        }
     }
-}
 
     /**
  * @swagger
@@ -556,31 +578,31 @@ async readAll(req: Request, res: Response, next: NextFunction): Promise<void> {
  *               example:
  *                 message: "Error interno del servidor"
  */
-async updateBanned(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
-        if (!req.user) {
-            res.status(401).json({ message: 'Unauthorized' });
-            throw new UnauthorizedError("user not set in jwt");
-        }
-        if (req.user.role !== "ADMIN") {
-            res.status(403).json({ message: 'Forbidden' });
-            throw new UnauthorizedError("user not authorized");
-        }
-        const user = await userRepository.readById(parseInt(req.params.id));
-        if (!user) {
-            res.status(404).json({ message: 'User not exists' });
-            throw new FindDbError("user");
-        }
+    async updateBanned(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            if (!req.user) {
+                res.status(401).json({ message: 'Unauthorized' });
+                throw new UnauthorizedError("user not set in jwt");
+            }
+            if (req.user.role !== "ADMIN") {
+                res.status(403).json({ message: 'Forbidden' });
+                throw new UnauthorizedError("user not authorized");
+            }
+            const user = await userRepository.readById(parseInt(req.params.id));
+            if (!user) {
+                res.status(404).json({ message: 'User not exists' });
+                throw new FindDbError("user");
+            }
 
-        const updatedUser = await userRepository.update(parseInt(req.params.id), { banned: !user.banned });
-        if (updatedUser) {
-            res.json(updatedUser);
-        } else {
-            res.status(404).json({ message: 'User not found' });
+            const updatedUser = await userRepository.update(parseInt(req.params.id), { banned: !user.banned });
+            if (updatedUser) {
+                res.json(updatedUser);
+            } else {
+                res.status(404).json({ message: 'User not found' });
+            }
+        } catch (error) {
+            next(error);
         }
-    } catch (error) {
-        next(error);
     }
-}
 
 }
