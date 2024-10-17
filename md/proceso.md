@@ -355,3 +355,11 @@ project/
 ```
 
 </details><br/>
+
+## 5. Documentar API con Swagger
+### Objetivo principal
+Explorar documentación de API usando JSDocs y Swagger.
+### Detalles
+#### Configurar Swagger
+- Instalar las dependencias necesarias en la carpeta backend.
+- En la función de configuración de las opciones de swagger, tener en cuenta la ruta donde se utilizara, no la ruta donde esta dicho archivo, para apuntar a las rutas que contienen la información de Swagger.

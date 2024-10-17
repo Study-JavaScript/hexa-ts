@@ -1,5 +1,5 @@
 import swaggerJSDoc from "swagger-jsdoc";
-import path from "path";
+// import path from "path";
 
 // Opciones para Swagger JSDoc
 const swaggerOptions = {
@@ -20,10 +20,19 @@ const swaggerOptions = {
                 url: 'http://localhost:3000',
             },
         ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT', // Opcional, pero recomendado
+                },
+            },
+        },
     },
-    // apis: ['./interface/controllers/*.yml'],
     apis: ["./interface/routes/*.ts", "./interface/controllers/*.ts"]
 };
+
 
 // Generar la especificación Swagger
 export const swaggerDocs = swaggerJSDoc(swaggerOptions);

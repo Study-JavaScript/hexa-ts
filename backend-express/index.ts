@@ -5,8 +5,8 @@ import { swaggerDocs } from "./interface/controllers/swagger";
 
 
 const app = express();
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 setupRoutes(app);
 
 app.listen(3000, () => {
