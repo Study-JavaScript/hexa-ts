@@ -1,5 +1,5 @@
 import { PrismaClientConfig } from "../connectors/prisma-db";
-import { LikePost } from "../../domain/entities/LikePost";
+import { LikePost } from "../../domain/entities/likepost";
 import { LikePostRepository } from "../../application/repositories/likepost";
 
 export class PrismaLikePostRepository extends PrismaClientConfig implements LikePostRepository {

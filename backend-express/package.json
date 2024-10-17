@@ -6,7 +6,10 @@
   "scripts": {
     "prisma:generate": "prisma generate --schema=./infrastructure/prisma/schema.prisma",
     "prisma:migrate": "prisma migrate dev --schema=./infrastructure/prisma/schema.prisma",
-    "prisma:studio": "prisma studio --schema=./infrastructure/prisma/schema.prisma"
+    "prisma:studio": "prisma studio --schema=./infrastructure/prisma/schema.prisma",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -32,5 +35,10 @@
     "esbuild-register": "^3.6.0",
     "nodemon": "^3.1.7",
     "typescript": "^5.6.2"
-  }
+  },
+  "workspaces": [
+    "../domain",
+    "../infrastructure",
+    "../application"
+  ]
 }

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { PrismaPostRepository } from "../../../infrastructure/repositories/prisma-post";
 import { FindDbError, UnauthorizedError } from "../../../domain/errors/main";
-import { Post } from "../../../domain/entities/Post";
+import { Post } from "../../../domain/entities/post";
 import { UserJWT } from "../../express";
 
 const postRepository = new PrismaPostRepository()
