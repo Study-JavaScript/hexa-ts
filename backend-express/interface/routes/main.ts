@@ -1,12 +1,25 @@
-
 import express,{ Application, NextFunction, Request, Response } from "express";
+import swaggerUi from "swagger-ui-express";
+import { swaggerDocs } from "../config/swagger";
 import { NoAuthenticateRouter, UserRouter } from "./user";
 import { PostRouter } from "./post";
 import { authenticateJWT, authorizeAdmin } from "../controllers/auth";
 import { LikePostRouter } from "./likepost";
 
 export const setupRoutes = (app: Application) => {
+
+
+  // Servir Swagger UI
+  // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
   app.use(express.json());
+  /**
+ * @swagger
+ * tags:
+ *   name: Autenticación
+ *   description: Rutas de autenticación
+ */
   app.use(NoAuthenticateRouter)
   // app.use((req, res, next) => {
   //   console.log("Before authenticateJWT middleware:", req.body);
@@ -18,8 +31,32 @@ export const setupRoutes = (app: Application) => {
   //   next();
   // });
   app.use("/admins", authorizeAdmin)
+  /**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: Rutas de manejo de perfil (usuario) para usuarios activos.
+ */
+/**
+ * @swagger
+ * tags:
+ *   name: Admin Users
+ *   description: Rutas de manejo de perfil de usuarios activos para administradores.
+ */
   app.use(UserRouter);
+  /**
+ * @swagger
+ * tags:
+ *   name: Posts
+ *   description: Rutas de manejo de posts para usuarios activos.
+ */
   app.use(PostRouter);
+    /**
+ * @swagger
+ * tags:
+ *   name: Like Posts
+ *   description: Rutas de manejo de likes de posts para usuarios activos.
+ */
   app.use(LikePostRouter)
   app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof Error) {
@@ -27,6 +64,6 @@ export const setupRoutes = (app: Application) => {
       return res.status(500).json({ message: err.message });
     }
     console.error(err);
-    return res.status(500).json({ message: "Something went wrong" });
+    return res.status(500).json({ message: "Error interno del servidor" });
   });
 };

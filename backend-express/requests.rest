@@ -13,32 +13,32 @@ Content-Type: application/json
 ### Read todos los usuarios ❌ 
 GET http://localhost:3000/admins/users
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzI3MDg2ODI3LCJleHAiOjE3MjcwOTA0Mjd9.6Chcui95aGHee_W7Gut7dwk1GkPt-8CKZm---4NczEM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjcyNTcyODMsImV4cCI6MTcyNzI2MDg4M30.naTrpc_uyenmI25PLttTJ9H-Q4Yy7bn0xZJXT1zlVVY
 
 ###
 
 ### Read un usuario por ID ✅
 GET http://localhost:3000/users/id?q=2
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjcwODA2MTUsImV4cCI6MTcyNzA4NDIxNX0.ob5TZA8iZxKRzUphQGTWvfbkShTwmtzmODFoI7fRVTQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjcyNTcyODMsImV4cCI6MTcyNzI2MDg4M30.naTrpc_uyenmI25PLttTJ9H-Q4Yy7bn0xZJXT1zlVVY
 
 ###
 
 ### Read un usuario por ID ✅
 GET http://localhost:3000/users/email?q=firstAdmin@prisma.io
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjcwODI4MTQsImV4cCI6MTcyNzA4NjQxNH0.VtDKQD505CGjfgXZJzZDqjYCazetJNlKR6drb9_LkIo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjcyNTcyODMsImV4cCI6MTcyNzI2MDg4M30.naTrpc_uyenmI25PLttTJ9H-Q4Yy7bn0xZJXT1zlVVY
 
 ### 
 
 ### Update un usuario ✅
-PUT http://localhost:3000/users/3
+PUT http://localhost:3000/users/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzI3MDIzNDEwLCJleHAiOjE3MjcwMjcwMTB9.3B41-Xa5uK-pOsyRMQIpZNI7QXZoCe0cjL3vmFcPX8Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjcyNTcyODMsImV4cCI6MTcyNzI2MDg4M30.naTrpc_uyenmI25PLttTJ9H-Q4Yy7bn0xZJXT1zlVVY
 Accept: application/json
 
 {
-  "name": "Usuario de prueba 3a"
+  "name": "Usuario de prueba 2a"
 }
 
 
