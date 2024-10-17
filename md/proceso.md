@@ -362,4 +362,11 @@ Explorar documentación de API usando JSDocs y Swagger.
 ### Detalles
 #### Configurar Swagger
 - Instalar las dependencias necesarias en la carpeta backend.
+    - Usar JSDocs para documentar cada uno de los endpoints de la API.
+    - Usar swagger-jsdoc para generar la documentación de la API.
+    - Usar swagger-ui-express para visualizar la documentación de la API.
 - En la función de configuración de las opciones de swagger, tener en cuenta la ruta donde se utilizara, no la ruta donde esta dicho archivo, para apuntar a las rutas que contienen la información de Swagger.
+#### Documentar endpoints
+- Documentar endpoints de la API, se recomienda hacer en los usecases de la aplicación y definir el orden de los tags en el main de las routes.
+- Para ello puedes ver los diferentes ejemplos utilizados hasta las funciones de users.
+

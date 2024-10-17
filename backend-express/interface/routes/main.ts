@@ -48,9 +48,15 @@ export const setupRoutes = (app: Application) => {
  * @swagger
  * tags:
  *   name: Posts
- *   description: Rutas de manejo de posts para usuario activo.
+ *   description: Rutas de manejo de posts para usuarios activos.
  */
   app.use(PostRouter);
+    /**
+ * @swagger
+ * tags:
+ *   name: Like Posts
+ *   description: Rutas de manejo de likes de posts para usuarios activos.
+ */
   app.use(LikePostRouter)
   app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof Error) {

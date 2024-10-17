@@ -378,12 +378,12 @@ export class UserController {
      *                   example:
      *                     message: "Prohibido. No autorizado a modificar este usuario"
      *             examples:
-    *               Usuario baneado:
-    *                 $ref: '#/components/responses/BannedUserError'
-    *               ForbiddenError:
-    *                 summary: Usuario no autorizado
-    *                 value:
-    *                   message: "Prohibido. No autorizado a modificar este usuario"
+     *               Usuario baneado:
+     *                 $ref: '#/components/responses/BannedUserError'
+     *               ForbiddenError:
+     *                 summary: Usuario no autorizado
+     *                 value:
+     *                   message: "Prohibido. No autorizado a modificar este usuario"
      *       404:
      *         description: Usuario no encontrado
      *         content:
