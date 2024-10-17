@@ -1,5 +1,3 @@
-
-
 export type LikePost = {
     id: number;
     userId: number;
