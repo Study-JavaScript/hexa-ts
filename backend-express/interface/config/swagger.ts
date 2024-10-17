@@ -6,9 +6,9 @@ const swaggerOptions = {
     swaggerDefinition: {
         openapi: '3.0.0',
         info: {
-            title: 'Hexagonal architecture API example',
+            title: 'Estructura de puertos y adaptadores',
             version: '1.0.0',
-            description: 'Documentación de la API usada como ejemplo de desarrollo para arquitectura hexagonal',
+            description: 'Documentación de la API usada como ejemplo de desarrollo para arquitectura de puertos y adaptadores',
             contact: {
                 name: "SKRTEEEEEE",
                 url: "https://profile-skrt.vercel.app",
