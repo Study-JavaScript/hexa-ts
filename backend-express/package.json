@@ -1,5 +1,5 @@
 {
-  "name": "backend-express-6.1itacademy",
+  "name": "@hexa-ts/backend-express",
   "version": "1.0.0",
   "description": "backend from excercise 6.1 of It Academy",
   "main": "index.js",
