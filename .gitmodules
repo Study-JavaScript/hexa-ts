@@ -7,3 +7,6 @@
 [submodule "infrastructure"]
 	path = infrastructure
 	url = https://github.com/Study-JavaScript/infrastructure.git
+[submodule "application"]
+	path = application
+	url = https://github.com/Study-JavaScript/application.git
