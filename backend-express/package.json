@@ -4,10 +4,11 @@
   "description": "backend from excercise 6.1 of It Academy",
   "main": "index.js",
   "scripts": {
-    "prisma:generate": "cd ../infrastructure && npx prisma generate --schema=./prisma/schema.prisma",
+    "prisma:generate": "cd ../infrastructure && npx prisma generate",
     "prisma:migrate": "cd ../infrastructure && npx prisma migrate dev --schema=./prisma/schema.prisma",
     "prisma:studio": "cd ../infrastructure && npx prisma studio --schema=./prisma/schema.prisma",
     "preinstall": "cd ../infrastructure && npm install",
+    "postinstall": "npm run prisma:generate"
     
     "build": "tsc",
     "start": "node index.js",
