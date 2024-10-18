@@ -8,7 +8,7 @@
     "prisma:migrate": "cd ../infrastructure && npx prisma migrate dev --schema=./prisma/schema.prisma",
     "prisma:studio": "cd ../infrastructure && npx prisma studio --schema=./prisma/schema.prisma",
     "preinstall": "cd ../infrastructure && npm install",
-    "postinstall": "npm run prisma:generate"
+    "postinstall": "npm run prisma:generate",
     
     "build": "tsc",
     "start": "node index.js",
