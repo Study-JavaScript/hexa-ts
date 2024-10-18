@@ -29,6 +29,8 @@ export class LikePostController {
      *     summary: 💖 Like a post
      *     description: <h4>Dar me gusta a un Post.</h4><br/> Este endpoint permite dar me gusta a un post.
      *     tags: [Like Posts] 
+     *     security:
+     *       - bearerAuth: []
      *     parameters:
      *       - name: id
      *         in: path

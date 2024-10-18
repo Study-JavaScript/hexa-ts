@@ -10,7 +10,7 @@
     "preinstall": "cd ../infrastructure && npm install",
     "postinstall": "cd ../infrastructure && npx prisma generate --schema=./prisma/schema.prisma",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node index.js",
     "dev": "ts-node index.ts"
   },
   "dependencies": {
