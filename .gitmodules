@@ -1,3 +1,6 @@
 [submodule "backend-express"]
 	path = backend-express
 	url = https://github.com/Study-JavaScript/backend-express.git
+[submodule "domain"]
+	path = domain
+	url = https://github.com/Study-JavaScript/domain.git
