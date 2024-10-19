@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-# Hexagonal architecture migration
+# Arquitectura de Puertos y Adaptadores
 <a href="https://github.com/SKRTEEEEEE">
 <div align="center">
   <img  src="https://github.com/SKRTEEEEEE/SKRTEEEEEE/blob/main/resources/img/grid-snake.svg"
@@ -10,7 +10,39 @@
 
 ## Información
 
+Actual ejercicio 5.1, antiguo ejercicio 6 del curso de [NodeJS](https://nodejs.org/en) de [ItAcademy](https://www.barcelonactiva.cat/es/itacademy).
+
 Proyecto para explorar conceptos y técnicas útiles especialmente en arquitecturas hexagonales/clean architecture o MVC.
+
+### Tecnologías utilizadas
+- [**express**](https://expressjs.com/es/)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [dotenv](https://www-dotenv-org.webpkgcache.com/doc/-/s/www.dotenv.org/docs/)
+- [cors](https://www.npmjs.com/package/cors#usage)
+- [**prisma**](https://www.prisma.io/docs)
+- [**typescript**](https://www.typescriptlang.org/docs/)
+
+### Requisitos 
+#### Requisitos técnicos endpoints
+##### Requisitos frontend
+- Posibilidad buscar posts -> que contengan ciertas letras como titulo 🖊️
+- Crear usuario
+- Read usuario por email
+- Read todas las publicaciones
+- Read usuario (?por id?)
+- Update usuario
+##### Requisitos backend
+- Crear publicaciones
+- Crear like 
+- Read publicaciones por user
+- Delete publicaciones por user 
+- Editar publicaciones por user
+- **Solo admin**
+  - Read todos los usuarios
+  - Banear/Reactivar usuarios
+  - Delete publicaciones 
+
 
 ### Guía de inicio
 #### Pre requisitos
@@ -20,58 +52,42 @@ Proyecto para explorar conceptos y técnicas útiles especialmente en arquitectu
 
 #### Instalación
 
-1. **Clonar el repositorio**:
+- **Clonar el repositorio**:
    ```bash
    git clone https://github.com/Study-JavaScript/hexa-ts.git
    ```
 
-2. **Navegar a la rama correspondiente al proyecto**:
-    ```bash
-    git checkout migrate-1
-    ```
-
-3. **Navegar a la carpeta de la `application`**:
-   ```bash
-   cd hexa-ts/application
-   ```
-
-4. **Instalar las dependencias**:
+- **Instalar las dependencias**:
    ```bash
    npm i
    ```
-
-   O si usas Yarn:
-   ```bash
-   yarn install
-   ```
   
-5. **Ejecutar el test de la `application`**:
-    ```bash
-    npm test
-    ```
-
-6. **Navegar a la carpeta del backend: `backend-express`**:
+#### Ejecución del Proyecto
+- **Navegar a la carpeta del backend: `backend-express`**:
     ```bash
     cd ../backend-express
     ```
 
-7. **Instalar dependencias**:
+- **Levantar backend**:
+    Una vez que hayas instalado las dependencias, puedes iniciar el servidor de desarrollo:
+
     ```bash
-    npm i
+    npx ts-node index
     ```
-#### Ejecución del Proyecto
 
+    El proyecto debería estar corriendo en `http://localhost:3000` (o en el puerto que hayas configurado).
 
-
-
-
-Una vez que hayas instalado las dependencias, puedes iniciar el servidor de desarrollo:
-
-```bash
-npx ts-node index
-```
-
-El proyecto debería estar corriendo en `http://localhost:3000` (o en el puerto que hayas configurado).
+#### Ejecución de Pruebas
+- **Navegar a la carpeta del backend: `backend-express`**:
+    - Si tienes corriendo el servidor, puedes abrir una nueva terminal.
+    - Si estas en la carpeta raíz, navega hacia la carpeta `backend-express`, utilizando el comando:
+        ```bash
+        cd backend-express
+        ```
+- **Ejecutar el test de la `application`**:
+    ```bash
+    npm run test:application
+    ```
 
 
 ### Tecnologías utilizadas
@@ -90,58 +106,70 @@ El proyecto debería estar corriendo en `http://localhost:3000` (o en el puerto 
 - _Esta es la idea a seguir actualmente como estructura_
 #### Estructura carpetas actual
 
+
 ```
 project/
-├── core/
-│   ├── domain/
-│   │   ├── entities/
-│   │   │   ├── User.ts
-│   │   │   └── Post.ts
-│   │   └── errors/
-│   │       ├── main.ts
-│   │       └── <others>.ts
-│   └── application/
-│       ├── usecases/
-│       │   ├── CreateUserUseCase.ts ⚠️🖊️
-│       │   └── CreatePostUseCase.ts ⚠️🖊️
-│       ├── repositories/
-│       │   ├── user.d.ts
-│       │   └── post.d.ts
-│       ├── services/
-│       │   ├── email.d.ts
-│       │   └── auth.d.ts
-│       └── ports/ ❓🖊️
-│           ├── in/
-│           │   └── UserControllerPort.ts
-│           └── out/
-│               └── UserPersistencePort.ts
+├── domain/
+│   ├── entities/
+│   │   ├── User.ts
+│   │   └── Post.ts
+│   ├── errors/
+│   │   ├── MainError.ts
+│   │   └── <other-errors>.ts
+│   └── tsconfig.json
+├── application/
+│   ├── usecases/
+│   │   ├── CreateUserUseCase.ts ⚠️🖊️
+│   │   └── CreatePostUseCase.ts ⚠️🖊️
+│   ├── repositories/
+│   │   ├── IUserRepository.ts
+│   │   └── IPostRepository.ts
+│   ├── services/ ❓⚠️
+│   │   ├── IEmailService.ts
+│   │   └── IAuthService.ts
+│   ├── test/
+│   │   ├── user/
+│   │   │   └── createUser.test.ts
+│   │   └── post/
+│   │       └── updatePost.test.ts
+│   ├── ports/ ❓🖊️
+│   │   ├── in/
+│   │   │   └── IUserControllerPort.ts
+│   │   └── out/
+│   │       └── IUserPersistencePort.ts
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── ...
 ├── infrastructure/
 │   ├── prisma/
 │   │   └── schema.prisma
 │   ├── repositories/
-│   │   ├── prisma-user.ts
-│   │   └── prisma-post.ts
+│   │   ├── PrismaUserRepository.ts
+│   │   └── PrismaPostRepository.ts
 │   ├── config/
-│   │   └── prisma-db.ts
+│   │   └── PrismaDbConfig.ts
 │   ├── package.json
-│   └── tsconfig.json
+│   ├── .env
+│   ├── tsconfig.json
+│   └── node_modules
 ├── backend/
-│   └── interfaces/ 
+│   └── interfaces/
 │       ├── controllers/
 │       │   └── ExpressUserController.ts
-│       └── routes/
-│           └── userRoutes.ts
+│       ├── routes/
+│       │   └── UserRoutes.ts
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── ...
 ├── frontend/
 │   ├── src/
-|   │   └── ...
-|   ├── package.json
-|   └── tsconfig.json
-└── tsconfig.json ❌⚠️
-    
+│   │   └── ...
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── ...
+
 ```
+
 
 </details>
 
@@ -159,7 +187,7 @@ project/
 ### Licencia
 
 ### Información de Contacto
-
+#### [Web del desarrollador](https://profile-skrt.vercel.app)
 #### [Envíame un mensaje](mailto:adanreh.m@gmail.com)
 
 ### Contribuciones y Problemas
