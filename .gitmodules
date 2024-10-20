@@ -10,9 +10,7 @@
 [submodule "application"]
 	path = application
 	url = https://github.com/Study-JavaScript/application.git
-# [submodule "md"]
-# 	path = md
-# 	url = https://github.com/Study-JavaScript/md.git
+
 [submodule "frontend-astro"]
 	path = frontend-astro
 	url = https://github.com/Study-JavaScript/frontend-astro.git
