@@ -14,3 +14,6 @@
 [submodule "frontend-astro"]
 	path = frontend-astro
 	url = https://github.com/Study-JavaScript/frontend-astro.git
+[submodule "utils"]
+	path = utils
+	url = https://github.com/Study-JavaScript/utils
