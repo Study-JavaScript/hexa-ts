@@ -388,4 +388,4 @@ Añadir los endpoints y modificaciones necesarias para cumplir con los requisito
 - [x] Añadir endpoint para el buscador de posts, por titulo y/o por contenido
 - [ ] ❓Añadir la funcionalidad de signup devolver un token (iniciar sesión)
 - [x] Empezar a migrar hacia una estructura mas solida y modular, con "shared" folders como `utils` o `web components`, etc... utilizando sub-modules de Github.
-    - [ ] Retirar md como sub-módulo
+    - [x] Retirar md como sub-módulo
