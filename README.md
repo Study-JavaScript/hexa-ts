@@ -57,7 +57,7 @@ Proyecto para explorar conceptos y técnicas útiles especialmente en arquitectu
     cd backend-express
     ```
 
-- **Crear el .env**:
+- **Crear el .env del backend**:
     ```bash
     echo -e '# Jwt secret\n\nJWT_SECRET="ILoveNode"' > .env
     ```
@@ -75,11 +75,17 @@ Proyecto para explorar conceptos y técnicas útiles especialmente en arquitectu
     Ahora podras ver la documentación de el backend en: 
     
     [`http://localhost:3000/api-docs`](http://localhost:3000/api-docs)
+
+- **Crear el .env de la `infrastructure`**:
+    Navegar a la carpeta `infrastructure` usando `cd ../infrastructure`.
+    ```bash
+    echo -e 'DATABASE_URL="file:./dev.db"' > .env
+    ```
   
 #### Frontend
 _Se recomienda usar pnpm_
 - Si tienes corriendo el servidor, puedes abrir una nueva terminal.
-- **Navegar a la carpeta del frontend:** _desde la carpeta`backend-express`_
+- **Navegar a la carpeta del frontend:** _desde la carpeta`backend-express o infrastructure`_
     ```bash
     cd ../frontend-astro
     ```
