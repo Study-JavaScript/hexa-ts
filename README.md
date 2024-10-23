@@ -13,16 +13,6 @@
 Actual ejercicio 5.1, antiguo ejercicio 6 del curso de [NodeJS](https://nodejs.org/en) de [ItAcademy](https://www.barcelonactiva.cat/es/itacademy).
 
 Proyecto para explorar conceptos y técnicas útiles especialmente en arquitecturas hexagonales/clean architecture o MVC.
-
-### Tecnologías utilizadas
-- [**express**](https://expressjs.com/es/)
-- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
-- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-- [dotenv](https://www-dotenv-org.webpkgcache.com/doc/-/s/www.dotenv.org/docs/)
-- [cors](https://www.npmjs.com/package/cors#usage)
-- [**prisma**](https://www.prisma.io/docs)
-- [**typescript**](https://www.typescriptlang.org/docs/)
-
 ### Requisitos 
 #### Requisitos técnicos endpoints
 <details>
