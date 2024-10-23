@@ -25,23 +25,27 @@ Proyecto para explorar conceptos y técnicas útiles especialmente en arquitectu
 
 ### Requisitos 
 #### Requisitos técnicos endpoints
-##### Requisitos frontend
-- Posibilidad buscar posts -> que contengan ciertas letras como titulo 🖊️
-- Crear usuario
-- Read usuario por email
-- Read todas las publicaciones
-- Read usuario (?por id?)
+<details>
+<summary>Requisitos frontend</summary>
+- Posibilidad buscar posts -> que contengan ciertas letras como titulo 🖊️ <br/>
+- Crear usuario <br/>
+- Read usuario por email <br/>
+- Read todas las publicaciones <br/>
+- Read usuario (?por id?) <br/>
 - Update usuario
-##### Requisitos backend
-- Crear publicaciones
-- Crear like 
-- Read publicaciones por user
-- Delete publicaciones por user 
-- Editar publicaciones por user
-- **Solo admin**
-  - Read todos los usuarios
-  - Banear/Reactivar usuarios
-  - Delete publicaciones 
+</details>
+<details>
+<summary>Requisitos backend</summary>
+- Crear publicaciones <br/>
+- Crear like <br/>
+- Read publicaciones por user <br/>
+- Delete publicaciones por user <br/>
+- Editar publicaciones por user <br/>
+- **Solo admin**<br/>
+  - Read todos los usuarios <br/>
+  - Banear/Reactivar usuarios <br/>
+  - Delete publicaciones  <br/>
+  </details>
 
 
 ### Guía de inicio
@@ -50,43 +54,81 @@ Proyecto para explorar conceptos y técnicas útiles especialmente en arquitectu
 - **Node.js**: Asegúrate de tener la última versión instalada. Puedes descargarla desde [nodejs.org](https://nodejs.org).
 - **Un gestor de paquetes**: Generalmente, utilizamos npm (incluido con Node.js) o Yarn.
 
-#### Instalación
+##### Importación
 
 - **Clonar el repositorio**:
    ```bash
-   git clone https://github.com/Study-JavaScript/hexa-ts.git
+   git clone --recurse-submodules https://github.com/Study-JavaScript/hexa-ts.git
    ```
+#### Backend
+
+- **Navegar a la carpeta del backend: `backend-express`**:
+    ```bash
+    cd backend-express
+    ```
+
+- **Crear el .env**:
+    ```bash
+    echo -e '# Jwt secret\n\nJWT_SECRET="ILoveNode"' > .env
+    ```
 
 - **Instalar las dependencias**:
    ```bash
    npm i
    ```
-  
-#### Ejecución del Proyecto
-- **Navegar a la carpeta del backend: `backend-express`**:
-    ```bash
-    cd ../backend-express
-    ```
 
 - **Levantar backend**:
-    Una vez que hayas instalado las dependencias, puedes iniciar el servidor de desarrollo:
-
     ```bash
     npx ts-node index
     ```
 
-    El proyecto debería estar corriendo en `http://localhost:3000` (o en el puerto que hayas configurado).
+    Ahora podras ver la documentación de el backend en: 
+    
+    [`http://localhost:3000/api-docs`](http://localhost:3000/api-docs)
+  
+#### Frontend
+_Se recomienda usar pnpm_
+- Si tienes corriendo el servidor, puedes abrir una nueva terminal.
+- **Navegar a la carpeta del frontend:** _desde la carpeta`backend-express`_
+    ```bash
+    cd ../frontend-astro
+    ```
+
+- **Instalar las dependencias**:
+   ```bash
+   npm i
+   ## or
+   pnpm i
+   ```
+
+- **Levantar frontend**:
+    
+    Una vez que hayas instalado las dependencias, puedes iniciar el servidor de desarrollo:
+
+    ```bash
+    npm run dev
+    ## or
+    pnpm dev
+    ```
+
+    El proyecto debería estar corriendo en [`http://localhost:4321`](http://localhost:4321) (o en el puerto que hayas configurado).
 
 #### Ejecución de Pruebas
-- **Navegar a la carpeta del backend: `backend-express`**:
-    - Si tienes corriendo el servidor, puedes abrir una nueva terminal.
-    - Si estas en la carpeta raíz, navega hacia la carpeta `backend-express`, utilizando el comando:
-        ```bash
-        cd backend-express
-        ```
+- Si tienes corriendo el servidor, puedes abrir una nueva terminal.
+- **Navegar a la carpeta de la application:** _desde `frontend-astro`_
+    
+    ```bash
+    cd ../application
+    ```
+
+- **Instalar las dependencias**:
+   ```bash
+   npm i
+   ```
+
 - **Ejecutar el test de la `application`**:
     ```bash
-    npm run test:application
+    npm test
     ```
 
 
@@ -100,6 +142,10 @@ Proyecto para explorar conceptos y técnicas útiles especialmente en arquitectu
 - [cors](https://www.npmjs.com/package/cors#usage)
 - [**prisma**](https://www.prisma.io/docs)
 - [**typescript**](https://www.typescriptlang.org/docs/)
+- [**astro**](https://astro.build/)
+- [**tailwindcss**](https://tailwindcss.com/)
+- [react](https://es.react.dev/)
+- [shadcnui](https://ui.shadcn.com/)
 
 <details><summary><h3>Estructura</h3></summary><br/>
 
