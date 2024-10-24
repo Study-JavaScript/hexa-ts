@@ -303,8 +303,8 @@ project/
 │   └── tsconfig.json
 ├── application/
 │   ├── usecases/
-│   │   ├── CreateUserUseCase.ts ⚠️🖊️
-│   │   └── CreatePostUseCase.ts ⚠️🖊️
+│   │   ├── atomic/
+│   │   └── comp/ 
 │   ├── repositories/
 │   │   ├── IUserRepository.ts
 │   │   └── IPostRepository.ts
@@ -316,11 +316,6 @@ project/
 │   │   │   └── createUser.test.ts
 │   │   └── post/
 │   │       └── updatePost.test.ts
-│   ├── ports/ ❓🖊️
-│   │   ├── in/
-│   │   │   └── IUserControllerPort.ts
-│   │   └── out/
-│   │       └── IUserPersistencePort.ts
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── ...

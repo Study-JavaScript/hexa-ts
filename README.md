@@ -161,8 +161,8 @@ project/
 │   └── tsconfig.json
 ├── application/
 │   ├── usecases/
-│   │   ├── CreateUserUseCase.ts ⚠️🖊️
-│   │   └── CreatePostUseCase.ts ⚠️🖊️
+│   │   ├── atomic/
+│   │   └── comp/
 │   ├── repositories/
 │   │   ├── IUserRepository.ts
 │   │   └── IPostRepository.ts
